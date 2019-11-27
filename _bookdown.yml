@@ -1,0 +1,3 @@
+book_filename: "hake-data"
+rmd_files: ["hake-data.Rmd"]
+delete_merged_file: true

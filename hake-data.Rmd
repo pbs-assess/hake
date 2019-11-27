@@ -1,0 +1,102 @@
+---
+title: "2019 Canadian Pacific Hake fishery"
+subtitle: "`r Sys.Date()`"
+author: "JTC<br/>🐟<br/>Chris Grandin"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [shinobi, ninjutsu]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE,
+                      error = FALSE,
+                      warning = FALSE,
+                      message = FALSE,
+                      results = FALSE,
+                      cache = TRUE,
+                      autodep = TRUE,
+                      cache.comments = FALSE,
+                      fig.align = "center",
+                      fig.width = 8,
+                      fig.height = 5,
+                      dev = 'svg',
+                      fig.asp = 0.618)
+options(htmltools.dir.version = FALSE)
+```
+
+```{r load-libraries, message = FALSE}
+library(here)
+library(tidyverse)
+library(gfutilities)
+library(hakedata)
+source(here("R/generate-data.R"))
+extract_date <- Sys.Date()
+year <- 2019
+coastwide_tac <- 519834
+canada_prop <- 0.2612
+canada_tac_nocarryover <- coastwide_tac * canada_prop
+carryover <- 20286
+canada_tac <- canada_tac_nocarryover + carryover
+landings_enddate <- lubridate::date(extract_date)
+landings_to_extractdate <- 0
+total_can_catch <- sum(ct_ft$landings, ct_ss$landings, ct_jv$landings) / 10e3
+ft_perc <- sum(ct_ft$landings) / 10e3 / total_can_catch * 100
+ss_perc <- sum(ct_ss$landings) / 10e3 / total_can_catch * 100
+jv_perc <- sum(ct_jv$landings) / 10e3 / total_can_catch * 100
+alloc_perc <- total_can_catch / canada_tac * 100
+```
+
+# **TAC and landed catch**
+
+*All catch values are preliminary*
+
+`r year` Coastwide TAC = `r gfutilities::f(coastwide_tac)` mt
+
+Canadian TAC (`r gfutilities::f(canada_prop * 100, 2)`%) = `r gfutilities::f(canada_tac_nocarryover)` mt
+
+Canadian carryover = `r gfutilities::f(carryover)` mt
+
+Total Canadian TAC = `r gfutilities::f(canada_tac)` mt
+
+Total landings up to Nov 27 = `r gfutilities::f(total_can_catch)` mt
+
+Canadian fisheries caught `r gfutilities::f(alloc_perc, 1)`% of their TAC
+
+Freezer trawlers caught `r gfutilities::f(ft_perc, 1)`% of Canadian catch
+
+Shoreside caught `r gfutilities::f(ss_perc, 1)`% of Canadian catch
+
+JV caught `r gfutilities::f(jv_perc, 1)`% of Canadian catch
+
+
+---
+
+# **Freezer trawler cumulative catch**
+```{r cumu-catch-ft}
+theme_set(hake_theme())
+plot_cumu_catch(ct_ft, ylim = c(1, 60), horiz_line_spacing = 10)
+```
+
+---
+
+# **Shoreside cumulative catch**
+```{r cumu-catch-ss}
+theme_set(hake_theme())
+plot_cumu_catch(ct_ss, ylim = c(1, 60), horiz_line_spacing = 10)
+```
+
+---
+
+# **JV cumulative catch**
+```{r cumu-catch-jv}
+theme_set(hake_theme())
+plot_cumu_catch(ct_jv, ylim = c(1, 10))
+```

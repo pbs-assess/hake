@@ -1,0 +1,12 @@
+.Rproj.user
+.Rhistory
+.RData
+.DS_Store
+*.html
+libs
+_bookdown_files
+hake-data_cache
+hake-data_files
+data-cache
+data
+test.Rmd
