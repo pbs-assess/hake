@@ -4,14 +4,10 @@ subtitle: "`r Sys.Date()`"
 author: "JTC<br/>🐟<br/>Chris Grandin"
 date: "`r Sys.Date()`"
 output:
-  xaringan::moon_reader:
-    lib_dir: libs
-    css: [shinobi, ninjutsu]
-    nature:
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-
+  rmdshower::shower_presentation:
+    self_contained: false
+    katex: true
+    ratio: 16x10
 ---
 
 
@@ -25,14 +21,16 @@ knitr::opts_chunk$set(echo = FALSE,
                       autodep = TRUE,
                       cache.comments = FALSE,
                       fig.align = "center",
-                      fig.width = 8,
-                      fig.height = 5,
+                      fig.width = 7,
+                      fig.height = 4,
                       dev = 'svg',
                       fig.asp = 0.618)
 options(htmltools.dir.version = FALSE)
 ```
 
 ```{r load-libraries, message = FALSE}
+library(knitr)
+library(kableExtra)
 library(here)
 library(tidyverse)
 library(gfutilities)
@@ -52,50 +50,54 @@ ft_perc <- sum(ct_ft$landings) / 10e3 / total_can_catch * 100
 ss_perc <- sum(ct_ss$landings) / 10e3 / total_can_catch * 100
 jv_perc <- sum(ct_jv$landings) / 10e3 / total_can_catch * 100
 alloc_perc <- total_can_catch / canada_tac * 100
+
+tl <- tribble(
+  ~description, ~value,
+  paste0(year, " Coastwide TAC"),                                      paste0(f(coastwide_tac), " mt"),
+  paste0("Canadian TAC (", f(canada_prop * 100, 2), "%)"),             paste0(f(canada_tac_nocarryover), " mt"),
+  "Canadian carryover",                                                paste0(f(carryover), " mt"),
+  paste("Total landings up to ", extract_date),                        paste0(f(total_can_catch), " mt"),
+  paste("% of TAC caught by Canadian fisheries up to ", extract_date), paste0(f(alloc_perc, 1), " %"),
+  "% of Canadian catch caught by Freezer Trawlers",                    paste0(f(ft_perc, 1), " %"),
+  "% of Canadian catch caught by Shoreside",                           paste0(f(ss_perc, 1), " %"),
+  "% of Canadian catch caught by Joint Venture",                       paste0(f(jv_perc, 1), " %")
+)
 ```
 
-# **TAC and landed catch**
+## 2019 Canadian Pacific Hake fishery
+
+<img src="images/hake-cover.jpg" class="cover">
+
+<div style = "position: absolute; bottom: 5px>
+<font size = "8" family = "PT Sans">
+<p class = "note">
+Joint Techincal Committee
+</p>
+</font>
+</div>
+
+## TAC and landed catch
 
 *All catch values are preliminary*
+<font size = "5">
+```{r tac-landing-table,results = 'asis'}
+kable(tl, col.names = NULL)
+```
+</font>
 
-`r year` Coastwide TAC = `r gfutilities::f(coastwide_tac)` mt
-
-Canadian TAC (`r gfutilities::f(canada_prop * 100, 2)`%) = `r gfutilities::f(canada_tac_nocarryover)` mt
-
-Canadian carryover = `r gfutilities::f(carryover)` mt
-
-Total Canadian TAC = `r gfutilities::f(canada_tac)` mt
-
-Total landings up to Nov 27 = `r gfutilities::f(total_can_catch)` mt
-
-Canadian fisheries caught `r gfutilities::f(alloc_perc, 1)`% of their TAC
-
-Freezer trawlers caught `r gfutilities::f(ft_perc, 1)`% of Canadian catch
-
-Shoreside caught `r gfutilities::f(ss_perc, 1)`% of Canadian catch
-
-JV caught `r gfutilities::f(jv_perc, 1)`% of Canadian catch
-
-
----
-
-# **Freezer trawler cumulative catch**
+## Freezer trawler cumulative catch
 ```{r cumu-catch-ft}
 theme_set(hake_theme())
 plot_cumu_catch(ct_ft, ylim = c(1, 60), horiz_line_spacing = 10)
 ```
 
----
-
-# **Shoreside cumulative catch**
+## Shoreside cumulative catch
 ```{r cumu-catch-ss}
 theme_set(hake_theme())
 plot_cumu_catch(ct_ss, ylim = c(1, 60), horiz_line_spacing = 10)
 ```
 
----
-
-# **JV cumulative catch**
+## JV cumulative catch
 ```{r cumu-catch-jv}
 theme_set(hake_theme())
 plot_cumu_catch(ct_jv, ylim = c(1, 10))
