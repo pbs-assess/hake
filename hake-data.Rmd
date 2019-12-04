@@ -6,12 +6,12 @@ date: "`r Sys.Date()`"
 output:
   rmdshower::shower_presentation:
     self_contained: false
-    katex: true
+    katex: false
     ratio: 16x10
 ---
 
 
-```{r setup, echo = FALSE}
+```{r setup, echo=FALSE, cache=FALSE, message=FALSE, results='hide', warning=FALSE}
 knitr::opts_chunk$set(echo = FALSE,
                       error = FALSE,
                       warning = FALSE,
@@ -28,14 +28,20 @@ knitr::opts_chunk$set(echo = FALSE,
 options(htmltools.dir.version = FALSE)
 ```
 
-```{r load-libraries, message = FALSE}
+```{r load-libraries, cache = FALSE}
 library(knitr)
 library(kableExtra)
 library(here)
 library(tidyverse)
 library(gfutilities)
 library(hakedata)
-source(here("R/generate-data.R"))
+library(mapview)
+```
+
+```{r load-code}
+source(here::here("R/generate-data.R"))
+source(here::here("R/spatial.R"))
+
 extract_date <- Sys.Date()
 year <- 2019
 coastwide_tac <- 519834
@@ -76,7 +82,7 @@ Joint Techincal Committee
 </font>
 </div>
 
-## TAC and landed catch
+# #TAC and landed catch
 
 *All catch values are preliminary*
 <font size = "5">
@@ -85,20 +91,41 @@ kable(tl, col.names = NULL)
 ```
 </font>
 
-## Freezer trawler cumulative catch
+# Freezer trawler cumulative catch
 ```{r cumu-catch-ft}
-theme_set(hake_theme())
 plot_cumu_catch(ct_ft, ylim = c(1, 60), horiz_line_spacing = 10)
 ```
 
-## Shoreside cumulative catch
+# Shoreside cumulative catch
 ```{r cumu-catch-ss}
-theme_set(hake_theme())
 plot_cumu_catch(ct_ss, ylim = c(1, 60), horiz_line_spacing = 10)
 ```
 
-## JV cumulative catch
+# JV cumulative catch
 ```{r cumu-catch-jv}
-theme_set(hake_theme())
 plot_cumu_catch(ct_jv, ylim = c(1, 10))
+```
+
+# Freezer trawler spatial catch
+```{r spatial-catch-ft}
+plot_spatial(grd_ft)
+```
+
+# Freezer trawler spatial catch - detail
+```{r spatial-catch-ft-detail}
+plot_spatial(grd_ft, 
+             extents = data.frame(lon = c(-130, -125),
+                                  lat = c(48, 52.3)))
+```
+
+# Shoreside spatial catch
+```{r spatial-catch-ss}
+plot_spatial(grd_ss)
+```
+
+# Shoreside spatial catch - detail
+```{r spatial-catch-ss-detail}
+plot_spatial(grd_ss, 
+             extents = data.frame(lon = c(-130, -125),
+                                  lat = c(48, 52.3)))
 ```
