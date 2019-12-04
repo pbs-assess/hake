@@ -35,8 +35,7 @@ library(here)
 library(tidyverse)
 library(gfutilities)
 library(hakedata)
-library(mapview)
-```
+l``
 
 ```{r load-code}
 source(here::here("R/generate-data.R"))
@@ -82,7 +81,7 @@ Joint Techincal Committee
 </font>
 </div>
 
-# #TAC and landed catch
+## TAC and landed catch
 
 *All catch values are preliminary*
 <font size = "5">
@@ -106,26 +105,54 @@ plot_cumu_catch(ct_ss, ylim = c(1, 60), horiz_line_spacing = 10)
 plot_cumu_catch(ct_jv, ylim = c(1, 10))
 ```
 
-# Freezer trawler spatial catch
-```{r spatial-catch-ft}
+# Freezer trawlers number of fishing events
+```{r spatial-ft}
 plot_spatial(grd_ft)
 ```
 
-# Freezer trawler spatial catch - detail
-```{r spatial-catch-ft-detail}
-plot_spatial(grd_ft, 
+# Freezer trawlers number of fishing events - detail
+```{r spatial-ft-detail}
+plot_spatial(grd_ft,
              extents = data.frame(lon = c(-130, -125),
                                   lat = c(48, 52.3)))
 ```
 
-# Shoreside spatial catch
-```{r spatial-catch-ss}
+# Shoreside number of fishing events
+```{r spatial-ss}
 plot_spatial(grd_ss)
 ```
 
-# Shoreside spatial catch - detail
-```{r spatial-catch-ss-detail}
+# Shoreside number of fishing events - detail
+```{r spatial-ss-detail}
 plot_spatial(grd_ss, 
+             extents = data.frame(lon = c(-130, -125),
+                                  lat = c(48, 52.3)))
+```
+
+# Freezer trawlers catch
+```{r spatial-ft-catch}
+plot_spatial(grd_ft,
+             data_col = "catch")
+```
+
+# Freezer trawlers catch - detail
+```{r spatial-ft-catch-detail}
+plot_spatial(grd_ft,
+             data_col = "catch",
+             extents = data.frame(lon = c(-130, -125),
+                                  lat = c(48, 52.3)))
+```
+
+# Shoreside catch
+```{r spatial-ss-catch}
+plot_spatial(grd_ss,
+             data_col = "catch")
+```
+
+# Shoreside catch - detail
+```{r spatial-ss-catch-detail}
+plot_spatial(grd_ss, 
+             data_col = "catch",
              extents = data.frame(lon = c(-130, -125),
                                   lat = c(48, 52.3)))
 ```
