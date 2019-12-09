@@ -67,6 +67,8 @@ tl <- tribble(
   "% of Canadian catch caught by Shoreside",                           paste0(f(ss_perc, 1), " %"),
   "% of Canadian catch caught by Joint Venture",                       paste0(f(jv_perc, 1), " %")
 )
+extents <- data.frame(lon = c(-131, -124),
+                      lat = c(48, 52.3))
 ```
 
 ## 2019 Canadian Pacific Hake fishery
@@ -113,16 +115,23 @@ plot_spatial(grd_ft)
 # Freezer trawlers number of fishing events - detail
 ```{r spatial-ft-detail}
 plot_spatial(grd_ft,
-             extents = data.frame(lon = c(-130, -125),
-                                  lat = c(48, 52.3)))
+             extents = extents)
+```
+
+# Freezer trawlers sum of catch
+```{r spatial-ft-sum-catch}
+plot_spatial(grd_sum_catch_ft,
+             data_col = "catch",
+             data_factor = 1000,
+             extents = extents)
 ```
 
 # Freezer trawlers mean catch
 ```{r spatial-ft-catch}
 plot_spatial(grd_catch_ft,
-             extents = data.frame(lon = c(-130, -125),
-                                  lat = c(48, 52.3)),
-             data_col = "catch")
+             data_col = "catch",
+             data_factor = 1000,
+             extents = extents)
 ```
 
 # Shoreside number of fishing events
@@ -133,16 +142,23 @@ plot_spatial(grd_ss)
 # Shoreside number of fishing events - detail
 ```{r spatial-ss-detail}
 plot_spatial(grd_ss,
-             extents = data.frame(lon = c(-130, -125),
-                                  lat = c(48, 52.3)))
+             extents = extents)
+```
+
+# Shoreside sum of catch
+```{r spatial-ss-sum-catch}
+plot_spatial(grd_sum_catch_ss,
+             data_col = "catch",
+             data_factor = 1000,
+             extents = extents)
 ```
 
 # Shoreside mean catch
 ```{r spatial-ss-catch}
 plot_spatial(grd_catch_ss,
              data_col = "catch",
-             extents = data.frame(lon = c(-130, -125),
-                                  lat = c(48, 52.3)))
+             data_factor = 1000,
+             extents = extents)
 ```
 
 ##

@@ -26,11 +26,21 @@ grd_catch_ft <- make_grid(spct_ft,
                           min_num_fids = 3,
                           data_col = vars(catch),
                           data_fncs = funs(mean))
+grd_sum_catch_ft <- make_grid(spct_ft,
+                              cell_size = 10000,
+                              min_num_fids = 3,
+                              data_col = vars(catch),
+                              data_fncs = funs(sum))
 grd_catch_ss <- make_grid(spct_ss,
                           cell_size = 10000,
                           min_num_fids = 3,
                           data_col = vars(catch),
                           data_fncs = funs(mean))
+grd_sum_catch_ss <- make_grid(spct_ss,
+                              cell_size = 10000,
+                              min_num_fids = 3,
+                              data_col = vars(catch),
+                              data_fncs = funs(sum))
 
 # grd_jv <- make_grid(spct_jv,
 #                     cell_size = 10000,
