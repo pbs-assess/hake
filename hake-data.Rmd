@@ -100,10 +100,10 @@ plot_cumu_catch(ct_ft, ylim = c(1, 60), horiz_line_spacing = 10)
 plot_cumu_catch(ct_ss, ylim = c(1, 60), horiz_line_spacing = 10)
 ```
 
-# JV cumulative catch
-```{r cumu-catch-jv}
-plot_cumu_catch(ct_jv, ylim = c(1, 10))
-```
+<!-- # JV cumulative catch -->
+<!-- ```{r cumu-catch-jv} -->
+<!-- plot_cumu_catch(ct_jv, ylim = c(1, 10)) -->
+<!-- ``` -->
 
 # Freezer trawlers number of fishing events
 ```{r spatial-ft}
@@ -117,6 +117,14 @@ plot_spatial(grd_ft,
                                   lat = c(48, 52.3)))
 ```
 
+# Freezer trawlers mean catch
+```{r spatial-ft-catch}
+plot_spatial(grd_catch_ft,
+             extents = data.frame(lon = c(-130, -125),
+                                  lat = c(48, 52.3)),
+             data_col = "catch")
+```
+
 # Shoreside number of fishing events
 ```{r spatial-ss}
 plot_spatial(grd_ss)
@@ -124,35 +132,32 @@ plot_spatial(grd_ss)
 
 # Shoreside number of fishing events - detail
 ```{r spatial-ss-detail}
-plot_spatial(grd_ss, 
-             extents = data.frame(lon = c(-130, -125),
-                                  lat = c(48, 52.3)))
-```
-
-# Freezer trawlers catch
-```{r spatial-ft-catch}
-plot_spatial(grd_ft,
-             data_col = "catch")
-```
-
-# Freezer trawlers catch - detail
-```{r spatial-ft-catch-detail}
-plot_spatial(grd_ft,
-             data_col = "catch",
-             extents = data.frame(lon = c(-130, -125),
-                                  lat = c(48, 52.3)))
-```
-
-# Shoreside catch
-```{r spatial-ss-catch}
 plot_spatial(grd_ss,
-             data_col = "catch")
+             extents = data.frame(lon = c(-130, -125),
+                                  lat = c(48, 52.3)))
 ```
 
-# Shoreside catch - detail
-```{r spatial-ss-catch-detail}
-plot_spatial(grd_ss, 
+# Shoreside mean catch
+```{r spatial-ss-catch}
+plot_spatial(grd_catch_ss,
              data_col = "catch",
              extents = data.frame(lon = c(-130, -125),
                                   lat = c(48, 52.3)))
 ```
+
+##
+
+<img src="images/freezer-trawlers-ac-by-month-2019.png" class = "cover">
+
+##
+
+<img src="images/freezer-trawlers-ac.png" class = "cover">
+
+##
+
+<img src="images/shoreside-ac-by-month-2019.png" class = "cover">
+
+##
+
+<img src="images/shoreside-ac.png" class = "cover">
+
