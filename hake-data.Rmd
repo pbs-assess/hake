@@ -161,6 +161,9 @@ plot_spatial(grd_catch_ss,
              extents = extents)
 ```
 
+## Canadian age proportions
+<img style="float: bottom;" src="images/otoliths.jpg">
+
 ##
 
 <img src="images/freezer-trawlers-ac-by-month-2019.png" class = "cover">
@@ -176,4 +179,14 @@ plot_spatial(grd_catch_ss,
 ##
 
 <img src="images/shoreside-ac.png" class = "cover">
+
+## Fishing depths
+```{r depth-plot}
+plot_depths(ct_depths, plot_type = "box", legend_loc = "outside")
+```
+
+## Fishing depths
+```{r depth-plot-histogram}
+plot_depths(ct_depths)
+```
 
