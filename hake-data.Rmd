@@ -190,3 +190,12 @@ plot_depths(ct_depths, plot_type = "box", legend_loc = "outside")
 plot_depths(ct_depths)
 ```
 
+## Length frequencies 2019
+```{r length-plot-histogram}
+plot_lengths(yrs = 2019)
+```
+
+## Length frequencies all time
+```{r length-plot-histogram-all-years}
+plot_lengths()
+```
