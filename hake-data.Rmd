@@ -203,3 +203,7 @@ plot_lengths(yrs = 2019, xlim = c(0, 80), bin_width = 2)
 ```{r length-plot-histogram-all-years}
 plot_lengths(xlim = c(0, 80), bin_width = 2)
 ```
+
+##
+
+<img src="images/thats_all_folks.jpg" class="cover">
