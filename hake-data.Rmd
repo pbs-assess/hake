@@ -71,7 +71,7 @@ extents <- data.frame(lon = c(-131, -124),
                       lat = c(48, 52.3))
 ```
 
-## 2019 Canadian Pacific Hake fishery
+## Data for the 2019 Canadian Hake fishery
 
 <img src="images/hake-cover.jpg" class="cover">
 
