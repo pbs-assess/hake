@@ -180,22 +180,26 @@ plot_spatial(grd_catch_ss,
 
 <img src="images/shoreside-ac.png" class = "cover">
 
-## Fishing depths
+## Bottom depths of tows
 ```{r depth-plot}
-plot_depths(ct_depths, plot_type = "box", legend_loc = "outside")
+plot_depths(ct_depths,
+            plot_type = "box",
+            legend_loc = "outside")
 ```
 
-## Fishing depths
+## Bottom depths of tows 2019
 ```{r depth-plot-histogram}
-plot_depths(ct_depths)
+plot_depths(ct_depths %>% filter(lubridate::year(catchdate) %in% yrs),
+            xlim = c(0, 1000),
+            bin_width = 20)
 ```
 
 ## Length frequencies 2019
 ```{r length-plot-histogram}
-plot_lengths(yrs = 2019)
+plot_lengths(yrs = 2019, xlim = c(0, 80), bin_width = 2)
 ```
 
-## Length frequencies all time
+## Length frequencies 1972 - present
 ```{r length-plot-histogram-all-years}
-plot_lengths()
+plot_lengths(xlim = c(0, 80), bin_width = 2)
 ```
