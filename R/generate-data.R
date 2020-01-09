@@ -1,3 +1,4 @@
+library(hakedata)
 hake_theme <- function(){
   theme_bw() +
     theme(legend.box.background = element_rect(fill = alpha("white", 0.7)),
@@ -13,12 +14,16 @@ hake_theme <- function(){
 }
 
 # Read data from the CSV files extracted manually
+fetch_catch()
 d <- load_data()
 
 # Get catches from each fishery (by day)
 ct_ft <- get_catch(d, type = "ft")
 ct_ss <- get_catch(d, type = "ss")
 ct_jv <- get_catch(d, type = "jv")
+create_catch_csv_file(ct_ft, here("data", "can-ft-catch-by-month.csv"))
+create_catch_csv_file(ct_ss, here("data", "can-ss-catch-by-month.csv"))
+create_catch_csv_file(ct_jv, here("data", "can-jv-catch-by-month.csv"))
 
 # Get data with lat/longs from the database for each fishery
 spct_ft <- get_spatial_catch_sql("ft")
