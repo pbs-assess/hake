@@ -14,8 +14,24 @@ hake_theme <- function(){
 }
 
 # Read data from the CSV files extracted manually
-fetch_catch()
-d <- load_data()
+fetch_catch_data()
+d <- load_catch_data()
+
+fetch_sample_data()
+d <- get_age_props()
+
+fetch_spatial_catch_data("ft")
+fetch_spatial_catch_data("ss")
+fetch_spatial_catch_data("jv")
+ft_depth <- load_spatial_catch_data("ft")
+ss_depth <- load_spatial_catch_data("ss")
+jv_depth <- load_spatial_catch_data("jv")
+get_depth_by_year(ft_depth, "bottom", yrs = 2008:2019)
+get_depth_by_year(ss_depth, "bottom", yrs = 2008:2019)
+get_depth_by_year(jv_depth, "bottom", yrs = 2008:2019)
+get_depth_by_year(ft_depth, "gear", yrs = 2008:2019)
+get_depth_by_year(ss_depth, "gear", yrs = 2008:2019)
+get_depth_by_year(jv_depth, "gear", yrs = 2008:2019)
 
 # Get catches from each fishery (by day)
 ct_ft <- get_catch(d, type = "ft")
@@ -26,12 +42,12 @@ create_catch_csv_file(ct_ss, here("data", "can-ss-catch-by-month.csv"))
 create_catch_csv_file(ct_jv, here("data", "can-jv-catch-by-month.csv"))
 
 # Get data with lat/longs from the database for each fishery
-spct_ft <- get_spatial_catch_sql("ft")
-spct_ss <- get_spatial_catch_sql("ss")
-spct_jv <- get_spatial_catch_sql("jv")
+spct_ft <- conv_spatial("ft")
+spct_ss <- conv_spatial("ss")
+spct_jv <- conv_spatial("jv")
 
 # Merge the spatial catch data frames and make them into a spatial `sf` object
-spct <- merge_into_spatial(spct_ft,
-                           spct_ss,
-                           spct_jv)
+spct <- conv_spatial(spct_ft,
+                     spct_ss,
+                     spct_jv)
 

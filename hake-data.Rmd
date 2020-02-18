@@ -4,10 +4,13 @@ subtitle: "`r Sys.Date()`"
 author: "JTC<br/>🐟<br/>Chris Grandin"
 date: "`r Sys.Date()`"
 output:
-  rmdshower::shower_presentation:
-    self_contained: false
-    katex: false
-    ratio: 16x10
+  xaringan::moon_reader:
+    css: ["default", "fc", "fc-fonts"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+      highlightLines: true
 ---
 
 
@@ -83,6 +86,8 @@ Joint Techincal Committee
 </font>
 </div>
 
+---
+
 ## TAC and landed catch
 
 *All catch values are preliminary*
@@ -92,10 +97,14 @@ kable(tl, col.names = NULL)
 ```
 </font>
 
+---
+
 # Freezer trawler cumulative catch
 ```{r cumu-catch-ft}
 plot_cumu_catch(ct_ft, ylim = c(1, 60), horiz_line_spacing = 10)
 ```
+
+---
 
 # Shoreside cumulative catch
 ```{r cumu-catch-ss}
@@ -107,16 +116,22 @@ plot_cumu_catch(ct_ss, ylim = c(1, 60), horiz_line_spacing = 10)
 <!-- plot_cumu_catch(ct_jv, ylim = c(1, 10)) -->
 <!-- ``` -->
 
+---
+
 # Freezer trawlers number of fishing events
 ```{r spatial-ft}
 plot_spatial(grd_ft)
 ```
+
+---
 
 # Freezer trawlers number of fishing events - detail
 ```{r spatial-ft-detail}
 plot_spatial(grd_ft,
              extents = extents)
 ```
+
+---
 
 # Freezer trawlers sum of catch
 ```{r spatial-ft-sum-catch}
@@ -126,6 +141,8 @@ plot_spatial(grd_sum_catch_ft,
              extents = extents)
 ```
 
+---
+
 # Freezer trawlers mean catch
 ```{r spatial-ft-catch}
 plot_spatial(grd_catch_ft,
@@ -134,16 +151,22 @@ plot_spatial(grd_catch_ft,
              extents = extents)
 ```
 
+---
+
 # Shoreside number of fishing events
 ```{r spatial-ss}
 plot_spatial(grd_ss)
 ```
+
+---
 
 # Shoreside number of fishing events - detail
 ```{r spatial-ss-detail}
 plot_spatial(grd_ss,
              extents = extents)
 ```
+
+---
 
 # Shoreside sum of catch
 ```{r spatial-ss-sum-catch}
@@ -153,6 +176,8 @@ plot_spatial(grd_sum_catch_ss,
              extents = extents)
 ```
 
+---
+
 # Shoreside mean catch
 ```{r spatial-ss-catch}
 plot_spatial(grd_catch_ss,
@@ -161,24 +186,28 @@ plot_spatial(grd_catch_ss,
              extents = extents)
 ```
 
+---
+
 ## Canadian age proportions
-<img style="float: bottom;" src="images/otoliths.jpg">
+<img src="images/otoliths.jpg" height="640" width="740">
 
-##
+---
 
-<img src="images/freezer-trawlers-ac-by-month-2019.png" class = "cover">
+<img src="images/freezer-trawlers-ac-by-month-2019.png" height="640" width="740">
 
-##
+---
 
-<img src="images/freezer-trawlers-ac.png" class = "cover">
+<img src="images/freezer-trawlers-ac.png" height="640" width="740">
 
-##
+---
 
-<img src="images/shoreside-ac-by-month-2019.png" class = "cover">
+<img src="images/shoreside-ac-by-month-2019.png" height="640" width="740">
 
-##
+---
 
-<img src="images/shoreside-ac.png" class = "cover">
+<img src="images/shoreside-ac.png" height="640" width="740">
+
+---
 
 ## Bottom depths of tows
 ```{r depth-plot}
@@ -187,6 +216,8 @@ plot_depths(ct_depths,
             legend_loc = "outside")
 ```
 
+---
+
 ## Bottom depths of tows 2019
 ```{r depth-plot-histogram}
 plot_depths(ct_depths %>% filter(lubridate::year(catchdate) %in% yrs),
@@ -194,16 +225,20 @@ plot_depths(ct_depths %>% filter(lubridate::year(catchdate) %in% yrs),
             bin_width = 20)
 ```
 
+---
+
 ## Length frequencies 2019
 ```{r length-plot-histogram}
 plot_lengths(yrs = 2019, xlim = c(0, 80), bin_width = 2)
 ```
+
+---
 
 ## Length frequencies 1972 - present
 ```{r length-plot-histogram-all-years}
 plot_lengths(xlim = c(0, 80), bin_width = 2)
 ```
 
-##
+---
 
 <img src="images/thats_all_folks.jpg" class="cover">
